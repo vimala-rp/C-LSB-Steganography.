@@ -1,84 +1,130 @@
-# LSB Image Steganography
+# 🔐 LSB Image Steganography in C
 
-### Hide Secret Data Inside BMP Images Using Least Significant Bit (LSB) Technique
+### Hiding Secret Data Inside BMP Images Using Least Significant Bit Manipulation
 
-## 📌 Project Overview
+<p align="center">
+  <b>A File-Hiding Implementation Using C Programming, Bitwise Operations and Binary File Handling</b>
+</p>
 
-LSB Image Steganography is a C programming project that allows users to hide secret file data inside a BMP image using the Least Significant Bit (LSB) technique.
+---
 
-The project implements both encoding and decoding operations, allowing users to embed confidential data into an image and retrieve the original file whenever required.
+## 🚀 Project Overview
 
-## 🎯 Project Objectives
+What if an image could carry information that isn't immediately visible?
 
-- Understand the Least Significant Bit (LSB) technique.
-- Implement data hiding using C programming.
-- Perform file handling using binary read and write operations.
-- Implement encoding and decoding mechanisms.
-- Retrieve hidden data with its original file extension.
+**LSB Image Steganography** is a C-based project that demonstrates how secret file data can be embedded inside a BMP image using the Least Significant Bit (LSB) technique.
 
-## ⚙️ Technologies Used
+The implementation supports both **Encoding and Decoding**, allowing users to hide a file within an image and subsequently retrieve the original content.
 
-- **Programming Language:** C
-- **Image Format:** BMP
-- **Technique:** Least Significant Bit (LSB)
-- **Concepts:** Bitwise Operations, Pointers, File Handling, Structures, Functions
+Rather than modifying the visible image structure significantly, the program modifies the least significant bits of image data to store the hidden information.
 
-## ✨ Key Features
+---
 
-- Hides secret file data inside BMP images.
-- Checks image capacity before encoding.
-- Uses a magic string (`#*`) to identify encoded data.
-- Stores file extension and file size as metadata.
-- Extracts hidden data during decoding.
-- Preserves the original BMP header and remaining image data.
+## ✨ Key Capabilities
 
-## 🔄 Project Workflow
+| Feature | Description |
+|---|---|
+| Data Encoding | Embeds secret file data into BMP image pixels. |
+| Data Decoding | Retrieves the hidden file from the stego image. |
+| Capacity Validation | Checks whether the image can accommodate the secret data. |
+| Magic String Verification | Uses `#*` to identify valid encoded content. |
+| Metadata Preservation | Stores the secret file extension and file size. |
+| BMP Header Handling | Preserves the original 54-byte BMP header. |
+| File Reconstruction | Recreates the extracted file with its original extension. |
 
-### 1. Encoding Process
+---
 
-1. Validate command-line arguments and input files.
-2. Open the source BMP image and secret file.
-3. Check whether the image has sufficient capacity.
-4. Copy the 54-byte BMP header.
-5. Embed the magic string and secret file metadata.
-6. Encode secret file data into image LSBs.
-7. Copy the remaining image data.
-8. Generate the stego image.
+## ⚙️ Technical Implementation
 
-### 2. Decoding Process
+The project demonstrates practical application of:
 
-1. Open the stego image.
-2. Skip the 54-byte BMP header.
-3. Decode and verify the magic string.
-4. Retrieve the secret file extension and size.
-5. Extract the hidden file data.
-6. Reconstruct the original file.
+- **LSB Bit Manipulation:** Embedding information into the least significant bits of image data.
+- **Bitwise Operators:** Using shifting, masking and bit extraction.
+- **Binary File Handling:** Reading and writing image and secret files in binary mode.
+- **Command-Line Arguments:** Selecting encoding or decoding operations.
+- **Structures and Enumerations:** Organizing project information and operation status.
+- **Modular Programming:** Separating encoding, decoding and shared definitions into individual source files.
 
-## 📂 Project Structure
+---
+
+## 🔄 How It Works
+
+### 01. Encoding – Hiding the Secret File
+
+The encoding module performs the following operations:
+
+1. Validates the input BMP image and secret file.
+2. Checks the available image capacity.
+3. Copies the original BMP header.
+4. Embeds the magic string and secret file metadata.
+5. Encodes secret file data into the image's LSBs.
+6. Copies the remaining image data.
+7. Generates the resulting stego image.
+
+### 02. Decoding – Extracting the Hidden File
+
+The decoding module reverses the process:
+
+1. Opens the stego image.
+2. Skips the 54-byte BMP header.
+3. Extracts and verifies the magic string.
+4. Retrieves the secret file extension and size.
+5. Extracts the hidden file data.
+6. Reconstructs the original file.
+
+---
+
+## 🛠️ Technology Stack
+
+| Category | Technology |
+|---|---|
+| Programming Language | C |
+| Image Format | BMP |
+| Steganography Technique | Least Significant Bit (LSB) |
+| Compiler | GCC |
+| Development Concepts | Pointers, Structures, Bitwise Operations, File Handling |
+
+---
+
+## 📁 Project Structure
 
 ```text
 LSB_Image_Steganography/
 │
-├── common.h
+├── main.c
 ├── encode.c
 ├── encode.h
 ├── decode.c
 ├── decode.h
-├── main.c
+├── common.h
 ├── types.h
 ├── beautiful.bmp
 └── README.md
 ```
 
-## 💻 Compilation
+**Module Responsibilities**
 
-Compile the project using GCC:
+- `main.c` – Command-line operation selection and program execution.
+- `encode.c / encode.h` – Encoding implementation and function declarations.
+- `decode.c / decode.h` – Decoding implementation and function declarations.
+- `common.h` – Shared magic string definition.
+- `types.h` – Common data types, status and operation enumerations.
+
+---
+
+## 💻 Build & Run
+
+### Prerequisites
+- GCC compiler
+- Linux environment or WSL
+- BMP source image
+- Secret file to encode
+
+### Compile
 
 ```bash
 gcc main.c encode.c decode.c -o stego
 ```
-
-## ▶️ Execution
 
 ### Encoding
 
@@ -92,18 +138,30 @@ gcc main.c encode.c decode.c -o stego
 ./stego -d stegno.bmp output.txt
 ```
 
-**Note:** The decoding operation reconstructs the hidden file using its stored extension.
+The decoding operation reconstructs the hidden file using its stored extension.
 
-## 🧠 Concepts Learned
+---
 
-- Least Significant Bit manipulation
-- Bitwise operators
-- Binary file handling
-- Command-line argument handling
-- Structures and enumerations
-- Modular programming in C
-- File size and image capacity calculations
+## 🎯 What This Project Demonstrates
 
-## 🚀 Conclusion
+This project showcases the ability to:
 
-This project demonstrates the practical implementation of image steganography using C programming. It provides hands-on experience with bitwise operations, binary file handling, and modular program design through encoding and decoding operations.
+- Translate a data-hiding concept into a working C implementation.
+- Work directly with binary image data.
+- Apply bitwise operations to manipulate individual bits.
+- Design separate encoding and decoding modules.
+- Validate input files and available image capacity.
+- Implement file extraction and reconstruction.
+
+---
+
+## 👩‍💻 Developer
+
+**Vimala R P**
+**GitHub Repository:** [C-LSB-Steganography](https://github.com/vimala-rp/C-LSB-Steganography)
+
+---
+
+<p align="center">
+  <b>Turning Bitwise Operations into Practical Applications.</b>
+</p>
